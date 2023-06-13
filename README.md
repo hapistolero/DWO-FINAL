@@ -1,7 +1,7 @@
 ## Final Project Pengembangan Data Warehouse dan Dashboard ADVENTUREWORKS
 # Dibuat oleh Kelompok 3
 # Program Studi Sistem Informasi
-# Fakultas Ilmu Komputer#
+# Fakultas Ilmu Komputer
 # UPN "Veteran" Jawa Timur
 # Nama Ketua :
 - Rizka Fiddiyansyah (21082010052)
