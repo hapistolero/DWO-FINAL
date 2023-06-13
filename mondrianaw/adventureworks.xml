@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<Schema name="dwadventureworks">
+<!--
+  == This software is subject to the terms of the Eclipse Public License v1.0
+  == Agreement, available at the following URL:
+  == http://www.eclipse.org/legal/epl-v10.html.
+  == You must accept the terms of that agreement to use this software.
+  ==
+  == Copyright (C) 2000-2005 Julian Hyde
+  == Copyright (C) 2005-2011 Pentaho and others
+  == All Rights Reserved.
+  -->
+
+<!-- Shared dimensions -->
+
+  
+
+<!-- Sales -->
+<Cube name="hr" defaultMeasure="total_gaji">
+  <!-- Use annotations to provide translations of this cube's caption and
+       description into German and French. Use of annotations in this manner is
+       experimental and unsupported; just for testing right now. -->
+  
+  <Table name="fact_hr"/>
+
+    
+  <Dimension name="Employee" foreignKey="employee_id" >
+    <Hierarchy hasAll="true" allMemberName="All Employees" primaryKey ="employee_id">
+      <Table name="dimensi_employee" />
+      <Level name="employee_name" column="employee_name"/>
+      <Level name="job_tittle" column="job_tittle" />
+      <Level name="hiredate" column="hiredate" />
+    </Hierarchy>
+  </Dimension>
+
+  <Dimension name="department" foreignKey="department_id" >
+    <Hierarchy  hasAll  ="true" allMemberName="All Departments" primaryKey  = "department_id">
+        <Table name="dimensi_department"/>
+        <Level name="department_name" column="department_name"/>
+        <Level name="group_name" column="group_name"/>
+    </Hierarchy>
+  </Dimension>
+
+  <Dimension name="PayHistory" foreignKey="id_payhist" >
+    <Hierarchy  hasAll  ="true" allMemberName="All Payhistories" primaryKey  = "paymenthist_id">
+        <Table name="dimensi_payhistory"/>
+        <Level name="rate" column="rate"/>
+        <Level name="pay_frequency" column="pay_frequency"/>
+    
+    </Hierarchy>
+  </Dimension>
+
+    <Dimension name="Time" foreignKey="hire_id" >
+    <Hierarchy hasAll="true" allMemberName="All Times" primaryKey ="hire_id"  >
+      <Table name="dimensi_time" />
+      <Level name="Year" column="tahun_tanggal" type="Integer" 
+          levelType="TimeYears"/>
+      <Level name="Month" column="tahun_bulan" uniqueMembers="false" type="Integer"
+          levelType="TimeMonths"/>
+      <Level name="Date" column="tanggal_tanggal" uniqueMembers="false" type="Integer"
+          levelType="TimeDays"/>
+    </Hierarchy>
+
+    </Dimension>
+  
+  <Measure name="TotalGaji" column="total_gaji" aggregator="sum"
+      formatString="Standard"/>
+  <Measure name="LamaBekerja" column="lama_bekerja" aggregator="avg"
+      formatString="Standard"/>
+   <Measure name="RataRataGaji" column="ratarata_gaji" aggregator="max"
+      formatString="Standard"/>
+  
+</Cube>
+
+</Schema>
